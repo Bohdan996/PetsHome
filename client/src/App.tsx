@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ChoosePage from './pages/ChoosePage';
+import GivePage from './pages/GivePetPage';
+import LoginPage from './pages/Login/Login';
+import TakePage from './pages/TakePetPage';
+import PrivateRoute from './utils/PrivateRoute';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route element={<ChoosePage />} path="/" />
+            <Route element={<GivePage />} path="/give" />
+            <Route element={<TakePage />} path="/take" />
+          </Route>
+          <Route element={<LoginPage />} path="/login"/>
+        </Routes>
+      </Router>
     </div>
   );
 }
